@@ -55,6 +55,7 @@ class UserTest < ActiveSupport::TestCase
   #既にデータベース内に存在するため、ユーザの作成は無効になるはずです。
   test "email addresses should be unique" do
     duplicate_user = @user.dup
+    duplicate_user.email = @user.email.upcase
     @user.save
     assert_not duplicate_user.valid?
   end
