@@ -46,4 +46,16 @@ class UserTest < ActiveSupport::TestCase
       assert @user.valid?, "#{valid_address.inspect} should be valid"
     end
   end
+  
+  
+  #@userと同じメールアドレスのユーザーは作成できないことを、
+  #@user.dupを使ってテストしています。
+  #dupは、同じ属性を持つデータを複製するためのメソッドです。
+  #@userを保存した後では、複製されたユーザーのメールアドレスが
+  #既にデータベース内に存在するため、ユーザの作成は無効になるはずです。
+  test "email addresses should be unique" do
+    duplicate_user = @user.dup
+    @user.save
+    assert_not duplicate_user.valid?
+  end
 end
