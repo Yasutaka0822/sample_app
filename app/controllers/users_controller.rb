@@ -7,4 +7,14 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+  
+  #ユーザ登録の失敗に対応できるcreateアクション
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      #handle a successful save.
+    else
+      render 'new'
+    end
+  end
 end
