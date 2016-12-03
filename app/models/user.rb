@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false } # 一意性の保証
   has_secure_password
+  validates :password,presence: true, length: { minimum:6 }#セキュアなパスワード
 end
